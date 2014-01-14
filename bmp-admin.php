@@ -8,7 +8,7 @@ require_once( 'Include/bmp-debug.php' );
 function bmp_admin() {
     //check permission
     
-    if (current_user_can('edit_plugins')) 
+    if (current_user_can('activate_plugins')) 
         {
         $message = null;
         $message_updated = __("Buffer My Post Options Updated.", 'BufferMyPost');
@@ -93,6 +93,11 @@ function bmp_admin() {
                 update_option('bmp_opt_post_format', $_POST['bmp_opt_post_format']);
             }
             
+             //type of post to post
+            if (isset($_POST['acntids'])) {
+                update_option('bmp_opt_acnt_id', $_POST['acntids']);
+            }
+            
             //type of post to post
             if (isset($_POST['bmp_opt_access_token'])) {
                 update_option('bmp_opt_access_token', $_POST['bmp_opt_access_token']);
@@ -117,6 +122,8 @@ function bmp_admin() {
             } else {
                 update_option('bmp_opt_omit_cats', '');
             }
+            
+            
 
             //successful update message
             print('
@@ -176,6 +183,12 @@ function bmp_admin() {
         $bmp_opt_no_of_post = get_option('bmp_opt_no_of_post');
         if (!(isset($bmp_opt_no_of_post) && is_numeric($bmp_opt_no_of_post))) {
             $bmp_opt_no_of_post = "1";
+        }
+        
+        //buffer profile
+        $acntids = get_option('bmp_opt_acnt_id');
+        if (!(isset($acntids))) {
+            $acntids = "";
         }
         
         //type of post to post
@@ -278,9 +291,50 @@ function bmp_admin() {
 							</select>
                                                         
 						</div>
+                                                
+                        <div class="option">
+                        <label for="bmp_opt_acnt_type">' . __('Accounts:<br/> <span class="desc">What accounts do you want to post?<span>', 'BufferMyPost') . ':</label>
+                        <div style="float:left">');
+                                 
+                                                
+                  $accessToken=  get_option("bmp_opt_access_token");
+                
+                $profile_url = 'https://api.bufferapp.com/1/profiles.json?access_token=' . urlencode($accessToken);
+                $r = wp_remote_get($profile_url,array(
+		    		'sslverify' => false
+		    	));
+                
+                if(!function_exists('json_decode')) {
+                    wp_die('A JSON library does not appear to be installed.\n\nPlease contact your server admini f you need help installing one.');
+                } else {
+                    $response = @json_decode($r['body']);
+                    if(!isset($response) || !is_array($response)) {
+			print(
+				'<p>Buffer has not returned an expected result.<br />' .
+				'Please check your Token.</p>'
+			);
+			
+                        }
+                        else
+                        {
+                        foreach($response as $profile) {
+                          print('<div class="buffer-account"><img src="'.$profile->avatar.'" width="48" height="48" alt="'.$profile->formatted_username.'" />
+                            <input type="checkbox" name="profile" value="'.$profile->id.'" id="'.$profile->id.'" onchange="manageacntid(this,\'' . $profile->id . '\');"  />
+                            <span class="'.$profile->service.'"></span></div>');
+                
+                        }
+                        
+                        }
+                    }
+  
+        
+                                                
                                                     
-
-
+                                                print('
+                                                    
+                                                    </div></div>
+                                                    
+                                                <input type="hidden" name="acntids" id="acntids" value="' . $acntids . '" />
                                                 <div class="option">
 							<label for="bmp_enable_log">' . __('Enable Log: ', 'BufferMyPost') . '</label>
 							<input type="checkbox" name="bmp_enable_log" id="bmp_enable_log" ' . $bmp_enable_log . ' /> 
@@ -400,6 +454,65 @@ function resetSettings()
 
 setFormAction();
 
+ function manageacntid(ctrl,id)
+				{
+					
+					var acntids = document.getElementById("acntids").value;
+					if(ctrl.checked)
+					{
+						acntids=addId(acntids,id);
+					}
+					else
+					{
+						acntids=removeId(acntids,id);
+					}	
+					document.getElementById("acntids").value=acntids;
+  
+				}
+
+function removeId(list, value) {
+  list = list.split(",");
+if(list.indexOf(value) != -1)
+  list.splice(list.indexOf(value), 1);
+  var newlist = list.join(",");
+  
+  if(newlist.substring(0,1) == ",")
+    newlist = newlist.substring(1,newlist.length);
+  
+if(newlist.substring(newlist.length-1,1) == ",")
+    newlist = newlist.substring(0,newlist.length-1);
+
+  return newlist;  
+}
+
+
+function addId(list,value)
+{
+list = list.split(",");
+if(list.indexOf(value) == -1)
+    list.push(value);
+newlist = list.join(",");
+if(newlist.substring(0,1) == ",")
+    newlist = newlist.substring(1,newlist.length);
+  
+if(newlist.substring(newlist.length-1,1) == ",")
+    newlist = newlist.substring(0,newlist.length-1);
+
+  return newlist;  
+}
+
+function setBufferIds()
+{
+    var acntids = document.getElementById("acntids").value;
+    var arracntids = acntids.split(",");
+    
+for(var i=0;i<arracntids.length;i++) {
+    document.getElementById(arracntids[i]).checked=true;
+}
+    
+
+}
+setBufferIds();
 </script>');
     } else {
         print('

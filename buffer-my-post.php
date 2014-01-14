@@ -4,7 +4,7 @@
 #     Plugin URI: http://www.ajaymatharu.com/buffer-my-posts/
 #     Description: This plugin helps you to keeps your old posts alive by posting it to buffer and driving more traffic to them from various social sites suppoerted by buffer. It also helps you to promote your content. You can set time and no of posts to post to drive more traffic. For questions, comments, or feature requests, contact me! <a href="http://www.ajaymatharu.com/">Ajay Matharu</a> you can follow me twitter at <a href="http://twitter.com/matharuajay/">@matharuajay</a>.
 #     Author: Ajay Matharu 
-#     Version: 13.10.5.1
+#     Version: 14.1.14.1
 #     Author URI: http://www.ajaymatharu.com/
 #     */  
  

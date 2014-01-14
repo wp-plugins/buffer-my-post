@@ -2,7 +2,7 @@
 Contributors: Ajay Matharu
 Tags: Tweet old post, Tweets, Promote old post by tweeting about them, Twitter, Auto Tweet, Hashtags, Twitter Hashtags, Tweet Posts, Tweet, Post Tweets, Wordpress Twitter Plugin, Twitter Plugin, Tweet Selected Posts, Twitter, Promote Posts, Tweet Random Post, Share Post, Promote Post, Post Tweets, Wordpress Twitter, Drive Traffic, Tweet Selected Posts, Buffer My Post, Post To Buffer, Buffer Post, Buffer Old Post  
 Requires at least: 2.7
-Tested up to: 3.6.1
+Tested up to: 3.8
 Stable tag: trunk
 
 
@@ -26,7 +26,7 @@ For updates follow http://twitter.com/matharuajay. If you have anything you can 
 - Include links back to your site.
 - Exclude categories
 - Exclude specific posts.
-
+- Post to specific buffer profile
 
 **Let me know if you have any more ideas**
 
@@ -79,3 +79,13 @@ ajay@ajaymatharu.com or matharuajay@yahoo.co.in
 for more you can check out 
 
 http://www.ajaymatharu.com/buffer-my-post/
+
+
+
+== Changelog ==
+
+
+**New in v14.1.14.1**
+
+- Added option to choose which buffer profile to post.
+- Minor fixes

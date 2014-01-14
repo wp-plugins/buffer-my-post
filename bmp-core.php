@@ -41,6 +41,7 @@ function bmp_opt_buffer_my_post() {
 
 function bmp_generate_query($can_requery = true)
 {
+    
     global $wpdb;
     $rtrn_msg="";
     $omitCats = get_option('bmp_opt_omit_cats');
@@ -360,6 +361,7 @@ update_option('bmp_opt_admin_url','');
 		
                 $accessToken=  get_option("bmp_opt_access_token");
                 
+                /*
                 $profile_url = 'https://api.bufferapp.com/1/profiles.json?access_token=' . urlencode($accessToken);
                 $r = wp_remote_get($profile_url,array(
 		    		'sslverify' => false
@@ -378,11 +380,19 @@ update_option('bmp_opt_admin_url','');
                         }
                         
                         foreach($response as $profile) {
+                            //BMP_DEBUG('buffer profile is: ' . print_r($profile, true));
                             $params['profile_ids'][]=$profile->id;
                         }
                     }
+                    */
                 
-                
+                    $acntids=  get_option("bmp_opt_acnt_id");
+                    if(isset($acntids))
+                    {
+                        $arracntid = explode(",",$acntids);
+                        foreach($arracntid as $profid)
+                            $params['profile_ids'][]=$profid;
+                    }   
                     
 		// 7. Send to Buffer and store response
 		$result = bmp_request($accessToken, 'updates/create.json', 'post', $params);
