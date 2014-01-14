@@ -89,3 +89,8 @@ http://www.ajaymatharu.com/buffer-my-post/
 
 - Added option to choose which buffer profile to post.
 - Minor fixes
+
+
+**New in v14.1.14.2**
+
+- Fix for linked in image

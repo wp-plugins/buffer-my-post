@@ -313,53 +313,46 @@ update_option('bmp_opt_admin_url','');
 		
 		// 2. Get author
 		$author = get_user_by('id', $post->post_author);
+                
+                // 3. Check if we have an excerpt. If we don't (i.e. it's a Page or CPT with no excerpt functionality), we need
+		// to create an excerpt
+		if (empty($post->post_excerpt)) {
+			$excerpt = wp_trim_words(strip_shortcodes($post->post_content));
+		} else {
+			$excerpt = $post->post_excerpt;
+		}
 		
 		// 4. Parse text and description
 		$params['text'] = get_option('bmp_opt_post_format');
 		$params['text'] = str_replace('{sitename}', get_bloginfo('name'), $params['text']);
 		$params['text'] = str_replace('{title}', $post->post_title, $params['text']);
-		$params['text'] = str_replace('{excerpt}', $post->post_excerpt, $params['text']);
+		$params['text'] = str_replace('{excerpt}', $excerpt, $params['text']);
 		$params['text'] = str_replace('{category}', trim($catNames), $params['text']);
 		$params['text'] = str_replace('{date}', date('dS F Y', strtotime($post->post_date)), $params['text']);
 		$params['text'] = str_replace('{url}', get_permalink($postID), $params['text']);
 		$params['text'] = str_replace('{author}', $author->display_name, $params['text']);
 		
-		// 5. Check if we can include the Featured Image (if available) in the media
+		// 5. Check if we can include the Featured Image (if available) in the media parameter
+		// If not, just attach the Post URL
+		$media['link'] = rtrim(get_permalink($post->ID), '/');
 		$featuredImageID = get_post_thumbnail_id($postID);
 		if ($featuredImageID > 0) {
-			// Get image source and attachment post
-			$featuredImageSrc = wp_get_attachment_image_src($featuredImageID, 'medium');
-			$attachment = new WP_Query(array(
-				'p' => $featuredImageID,
-				'post_parent' => $post->ID,
-				'post_status' => 'inherit',
-				'post_type' => 'attachment',
-				'post_mime_type' => 'image'
-			));
-			
-			// Build link, title and description of the image
-			if (count($attachment->posts) > 0) {
-				$image['link'] = $featuredImageSrc[0];
-				$image['title'] = $attachment->posts[0]->post_title;
-				if ($attachment->posts[0]->post_content != '') {
-					$image['description'] = $attachment->posts[0]->post_content;
-				} elseif ($attachment->posts[0]->post_excerpt != '') {
-					$image['description'] = $attachment->posts[0]->post_excerpt;
-				} else {
-					$image['description'] = $attachment->posts[0]->post_title;
-				}
+			// Get image source
+			$featuredImageSrc = wp_get_attachment_image_src($featuredImageID, 'large');
+			if (is_array($featuredImageSrc)) {
+				$media['title'] = $post->post_title; // Required for LinkedIn to work
+				$media['picture'] = $featuredImageSrc[0];
+				$media['thumbnail'] = $featuredImageSrc[0];
+				$media['description'] = $post->post_title;
+				unset($media['link']); // Important: if set, this attaches a link and drops the image!
 			}
-			
-			// Assign image array to media argument
-			$params['media'] = $image;
 		}
+		
+		// Assign media array to media argument
+		$params['media'] = $media;
 
 		// 6. Add profile IDs
-		/*foreach ($defaults['ids'][$post->post_type] as $profileID=>$enabled) {
-			if ($enabled) $params['profile_ids'][] = $profileID; 
-		}*/
-		
-                $accessToken=  get_option("bmp_opt_access_token");
+		$accessToken=  get_option("bmp_opt_access_token");
                 
                 /*
                 $profile_url = 'https://api.bufferapp.com/1/profiles.json?access_token=' . urlencode($accessToken);
