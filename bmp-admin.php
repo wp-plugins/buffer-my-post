@@ -216,15 +216,9 @@ function bmp_admin() {
 
         print('
 			<div class="wrap">
-				<h2>' . __('Buffer My Post by - ', 'BufferMyPost') . ' <a href="http://www.ajaymatharu.com">Ajay Matharu</a></h2>
-
-<h3>If you like this plugin, follow <a href="http://www.twitter.com/matharuajay">@matharuajay</a> on Twitter to help keep this plugin free...FOREVER!</h3>
-
-<a href="https://twitter.com/matharuajay" class="twitter-follow-button" data-show-count="true" data-size="large">Follow @matharuajay</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-<br /><br />
-
-
+				<h2>' . __('Buffer My Post by - ', 'BufferMyPost') . ' <a href="http://www.ajaymatharu.com" target="blank">Ajay Matharu</a> & Dejan Markovic  <a target="blank" href="http://dejanmarkovic.com/">Dejan Markovic</a></h2>
+<h3>If you like this plugin, follow us on twitter at <a target="blank" href="http://twitter.com/matharuajay/">@matharuajay</a> & <a target="blank" href="http://twitter.com/dejanmmarkovic/">@dejanmmarkovic</a>
+</h3>
 				<form id="bmp_opt" name="bmp_BufferMyPost" action="" method="post">
 					<input type="hidden" name="bmp_opt_action" value="bmp_opt_update_settings" />
 					<fieldset class="options">
@@ -299,7 +293,7 @@ function bmp_admin() {
                                                 
                   $accessToken=  get_option("bmp_opt_access_token");
                 
-                $profile_url = 'https://api.bufferapp.com/1/profiles.json?access_token=' . urlencode($accessToken);
+                $profile_url = 'https://api.bufferapp.com/1/profiles.json?access_token=' . htmlentities($accessToken);
                 $r = wp_remote_get($profile_url,array(
 		    		'sslverify' => false
 		    	));

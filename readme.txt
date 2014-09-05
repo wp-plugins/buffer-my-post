@@ -1,8 +1,8 @@
 ﻿=== Buffer My Post ===
-Contributors: Ajay Matharu
-Tags: Tweet old post, Tweets, Promote old post by tweeting about them, Twitter, Auto Tweet, Hashtags, Twitter Hashtags, Tweet Posts, Tweet, Post Tweets, Wordpress Twitter Plugin, Twitter Plugin, Tweet Selected Posts, Twitter, Promote Posts, Tweet Random Post, Share Post, Promote Post, Post Tweets, Wordpress Twitter, Drive Traffic, Tweet Selected Posts, Buffer My Post, Post To Buffer, Buffer Post, Buffer Old Post  
+Contributors: Ajay Matharu & Dejan Markovic
+Tags: Tweet old post, Tweets, Promote old post by tweeting about them, Twitter, Auto Tweet, Hashtags, Twitter Hashtags, Tweet Posts, Tweet, Post Tweets, Wordpress Twitter Plugin, Twitter Plugin, Tweet Selected Posts, Twitter, Promote Posts, Tweet Random Post, Share Post, Promote Post, Post Tweets, Wordpress Twitter, Drive Traffic, Tweet Selected Posts, Buffer My Post, Post To Buffer, Buffer Post, Buffer Old Post
 Requires at least: 2.7
-Tested up to: 3.8
+Tested up to: 3.9.2
 Stable tag: trunk
 
 
@@ -10,9 +10,9 @@ Plugin to Buffer about your old posts to get more hits for them and keep them al
 
 == Description ==
 
-Buffer My Posts is a plugin designed to Buffer your older posts to get more traffic. 
+Buffer My Posts is a plugin designed to Buffer your older posts to get more traffic.
 
-This plugin helps you to keeps your old posts alive by posting it to buffer and driving more traffic to them from buffer. It also helps you to promote your content. You can set time and no of posts to post to drive more traffic.For questions, comments, or feature requests, contact me! <a href="http://www.ajaymatharu.com/">Ajay Matharu</a> you can follow me twitter at <a href="http://twitter.com/matharuajay/">@matharuajay</a>.
+This plugin helps you to keeps your old posts alive by posting it to buffer and driving more traffic to them from buffer. It also helps you to promote your content. You can set time and no of posts to post to drive more traffic. For questions, comments, or feature requests please contact us: <a target="blank" href="http://www.ajaymatharu.com/">Ajay Matharu</a> OR Dejan Markovic  <a target="blank" href="http://dejanmarkovic.com/">Dejan Markovic</a>you can follow us on twitter at <a target="blank" href="http://twitter.com/matharuajay/">@matharuajay</a> & <a target="blank" href="http://twitter.com/dejanmmarkovic/">@dejanmmarkovic</a>.
 
 For updates follow http://twitter.com/matharuajay. If you have anything you can post your comment at <a href="http://www.ajaymatharu.com/buffer-my-post/">Buffer My Post Page.</a>
 
@@ -67,8 +67,8 @@ ajay@ajaymatharu.com or matharuajay@yahoo.co.in
 
 **Any more questions or doubts?**
 
-- DM me on http://twitter.com/matharuajay or mail me at ajay(at)ajaymatharu(dot)com 
-
+- DM us: 1. http://twitter.com/matharuajay or mail me at ajay(at)ajaymatharu(dot)com
+         2. http://twitter.com/dejanmmarkovic or mail me at dejan(at)dejanmarkovic(dot)com
 
 == Screenshots ==
 
