@@ -16,6 +16,8 @@ This plugin helps you to keeps your old posts alive by posting it to buffer and 
 
 For updates follow http://twitter.com/matharuajay. If you have anything you can post your comment at <a href="http://www.ajaymatharu.com/buffer-my-post/">Buffer My Post Page.</a>
 
+Dejan's Buffer My Post GitHub repository is available here <a target="blank" href="https://github.com/dejanmarkovic/buffer-my-post">Buffer My Post</a>
+Feel free to check Dejan's projects on GitHub <a target="blank" href="https://github.com/dejanmarkovic">https://github.com/dejanmarkovic</a>
 
 **Buffer My Post provides following features**
 
