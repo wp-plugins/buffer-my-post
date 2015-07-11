@@ -328,14 +328,9 @@ function bmp_admin() {
                                                 print('
 
                                                     </div></div>
-<br/>
-<br/>
                                                 <input type="hidden" name="acntids" id="acntids" value="' . $acntids . '" /><br/>
-<br/>
-<br/>
-
                                                 <div class="option"><br/>
-<br/>
+
 							<label for="bmp_enable_log">' . __('Enable Log: ', 'BufferMyPost') . '</label>
 							<input type="checkbox" name="bmp_enable_log" id="bmp_enable_log" ' . $bmp_enable_log . ' />
                                                         <b>saves log in log folder</b>
@@ -531,7 +526,7 @@ function bmp_opt_optionselected($opValue, $value) {
 }
 
 function bmp_opt_head_admin() {
-	$path = plugin_dir_path( __FILE__ ) . 'css/buffer-my-post.css' ;
+	$path = plugins_url() . '/buffer-my-post/css/buffer-my-post.css' ;
 	echo('<link rel="stylesheet" href="' . $path . '" type="text/css" media="screen" />');
 }
 

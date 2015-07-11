@@ -99,5 +99,9 @@ http://www.ajaymatharu.com/buffer-my-post/
 3. fixed admin style output n bmp-admin.php
 4. fixed Notice: has_cap was called with an argument that is deprecated since version 2.0! Usage of user levels by plugins and themes is deprecated in bmp_admin_actions() function
 
-**New in v15.0.1**
+**New in v15.0.2**
 1. Compatible up to 4.2.2
+
+**New in v15.0.3**
+1. fixed css path issue that was breaking the layout in admin
+2. added space between " Dejan Markovic" and "you..."
