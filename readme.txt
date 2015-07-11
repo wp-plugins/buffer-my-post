@@ -2,7 +2,7 @@
 Contributors: Ajay Matharu, dejanmarkovic, nytogroup
 Tags: Tweet old post, Tweets, Promote old post by tweeting about them, Twitter, Auto Tweet, Hashtags, Twitter Hashtags, Tweet Posts, Tweet, Post Tweets, Wordpress Twitter Plugin, Twitter Plugin, Tweet Selected Posts, Twitter, Promote Posts, Tweet Random Post, Share Post, Promote Post, Post Tweets, Wordpress Twitter, Drive Traffic, Tweet Selected Posts, Buffer My Post, Post To Buffer, Buffer Post, Buffer Old Post
 Requires at least: 2.7
-Tested up to: 3.9.2
+Tested up to: 4.2.2
 Stable tag: trunk
 
 
@@ -98,3 +98,6 @@ http://www.ajaymatharu.com/buffer-my-post/
 2. fixed the deprecated bug in bmp-debug.php
 3. fixed admin style output n bmp-admin.php
 4. fixed Notice: has_cap was called with an argument that is deprecated since version 2.0! Usage of user levels by plugins and themes is deprecated in bmp_admin_actions() function
+
+**New in v15.0.1**
+1. Compatible up to 4.2.2
