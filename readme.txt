@@ -16,8 +16,6 @@ This plugin helps you to keeps your old posts alive by posting it to buffer and 
 
 For updates follow http://twitter.com/matharuajay. If you have anything you can post your comment at <a href="http://www.ajaymatharu.com/buffer-my-post/">Buffer My Post Page.</a>
 
-Dejan's Buffer My Post GitHub repository is available here <a target="blank" href="https://github.com/dejanmarkovic/buffer-my-post">Buffer My Post</a>
-Feel free to check Dejan's projects on GitHub <a target="blank" href="https://github.com/dejanmarkovic">https://github.com/dejanmarkovic</a>
 
 **Buffer My Post provides following features**
 
@@ -78,7 +76,7 @@ ajay@ajaymatharu.com or matharuajay@yahoo.co.in
 2. Screenshot 2 configurable categories. Select categories to exclude from tweeting.
 3. Screenshot 3 Configure posts to exclude from selected categories :).
 
-for more you can check out 
+for more you can check out
 
 http://www.ajaymatharu.com/buffer-my-post/
 
@@ -92,7 +90,11 @@ http://www.ajaymatharu.com/buffer-my-post/
 - Added option to choose which buffer profile to post.
 - Minor fixes
 
-
 **New in v14.1.14.2**
-
 - Fix for linked in image
+
+**New in v15.0.1**
+1. added changelog.txt
+2. fixed the deprecated bug in bmp-debug.php
+3. fixed admin style output n bmp-admin.php
+4. fixed Notice: has_cap was called with an argument that is deprecated since version 2.0! Usage of user levels by plugins and themes is deprecated in bmp_admin_actions() function

@@ -18,7 +18,7 @@ function bmp_buffer_my_post() {
 }
 
 function bmp_currentPageURL() {
-    
+
     if(!isset($_SERVER['REQUEST_URI'])){
         $serverrequri = $_SERVER['PHP_SELF'];
     }else{
@@ -41,7 +41,7 @@ function bmp_opt_buffer_my_post() {
 
 function bmp_generate_query($can_requery = true)
 {
-    
+
     global $wpdb;
     $rtrn_msg="";
     $omitCats = get_option('bmp_opt_omit_cats');
@@ -51,18 +51,18 @@ function bmp_generate_query($can_requery = true)
     $exposts = preg_replace('/,,+/', ',', $exposts);
     $bmp_opt_post_type = get_option('bmp_opt_post_type');
     $bmp_opt_no_of_post = get_option('bmp_opt_no_of_post');
-    
+
     $bmp_opt_posted_posts = array();
     $bmp_opt_posted_posts = get_option('bmp_opt_posted_posts');
-    
+
     if(!$bmp_opt_posted_posts)
         $bmp_opt_posted_posts = array();
-        
+
     if($bmp_opt_posted_posts != null)
         $already_posted = implode(",", $bmp_opt_posted_posts);
     else
         $already_posted="";
-    
+
     if (substr($exposts, 0, 1) == ",") {
         $exposts = substr($exposts, 1, strlen($exposts));
     }
@@ -82,9 +82,9 @@ function bmp_generate_query($can_requery = true)
     }
 
     if($bmp_opt_no_of_post<=0){$bmp_opt_no_of_post = 1;}
-    
+
     if($bmp_opt_no_of_post>10){$bmp_opt_no_of_post = 10;}
-    
+
     if($bmp_opt_post_type!='both'){
 	$post_type = "post_type = '$bmp_opt_post_type' AND";
      }
@@ -92,17 +92,17 @@ function bmp_generate_query($can_requery = true)
      {
          $post_type="(post_type = 'post' OR post_type = 'page') AND";
      }
-    
+
     $sql = "SELECT ID,POST_TITLE
             FROM $wpdb->posts
             WHERE $post_type post_status = 'publish' ";
-    
+
     if(is_numeric($ageLimit))
     {
         if($ageLimit > 0)
                 $sql = $sql . " AND post_date <= curdate( ) - INTERVAL " . $ageLimit . " day";
     }
-    
+
     if ($maxAgeLimit != 0) {
         $sql = $sql . " AND post_date >= curdate( ) - INTERVAL " . $maxAgeLimit . " day";
     }
@@ -123,11 +123,11 @@ function bmp_generate_query($can_requery = true)
         $sql = $sql . " AND NOT (ID IN (SELECT tr.object_id FROM " . $wpdb->prefix . "term_relationships AS tr INNER JOIN " . $wpdb->prefix . "term_taxonomy AS tt ON tr.term_taxonomy_id = tt.term_taxonomy_id WHERE tt.taxonomy = 'category' AND tt.term_id IN (" . $omitCats . ")))";
     }
     $sql = $sql . "
-            ORDER BY RAND() 
+            ORDER BY RAND()
             LIMIT $bmp_opt_no_of_post ";
-   
+
     $oldest_post = $wpdb->get_results($sql);
-    
+
     if($oldest_post == null)
     {
         if($can_requery)
@@ -138,29 +138,29 @@ function bmp_generate_query($can_requery = true)
         }
         else
         {
-           return "No post found to post. Please check your settings and try again."; 
+           return "No post found to post. Please check your settings and try again.";
         }
     }
-       
+
      if(isset($oldest_post)){
 		 $ret = '';
 		 foreach($oldest_post as $k=>$odp){
                     array_push($bmp_opt_posted_posts, $odp->ID);
          	    $ret .= 'Tweet '.($k + 1) . ' ( '. $odp->POST_TITLE .' )' . ' : ' .bmp_publish($odp->ID).'<br/>';
 		}
-                
+
                 if ( function_exists('w3tc_pgcache_flush') ) {
                     w3tc_pgcache_flush();
                     w3tc_dbcache_flush();
                     w3tc_minify_flush();
                     w3tc_objectcache_flush();
                     $cache = ' and W3TC Caches cleared';
-                }           
-                
+                }
+
                 update_option('bmp_opt_posted_posts', $bmp_opt_posted_posts);
 		return $ret;
      }
-     
+
      return $rtrn_msg;
    }
 
@@ -202,10 +202,10 @@ function bmp_to_update() {
     $last  = $wpdb->get_var("select SQL_NO_CACHE option_value from $wpdb->options where option_name = 'bmp_opt_last_update';");
     //$last = get_option('bmp_opt_last_update');
     $interval = get_option('bmp_opt_interval');
-    
+
     if((trim($last)=='') || !(isset($last)))
         $last=0;
- 
+
     if (!(isset($interval))) {
         $interval = bmp_opt_INTERVAL;
     }
@@ -213,7 +213,7 @@ function bmp_to_update() {
     {
         $interval = bmp_opt_INTERVAL;
     }
-    
+
     $interval = $interval * 60 * 60;
     /*
     if (false === $last) {
@@ -221,7 +221,7 @@ function bmp_to_update() {
     } else if (is_numeric($last)) {
         $ret = ( (time() - $last) > ($interval ));
     }
-     
+
      */
 
     if (is_numeric($last)) {
@@ -288,14 +288,10 @@ update_option('bmp_opt_admin_url','');
     * @param int $postID Post ID
     */
     function bmp_publish($postID, $isPublishAction = false) {
-        
+
     	$meta = get_post_meta($postID, 'buffer-my-post', true); // Get post meta
         $defaults = get_option('buffer-my-post'); // Get settings
-        
-        //if (!is_array($meta) OR count($meta) == 0) $meta['publish'] = $_POST['buffer-my-post']['publish']; // If no meta defined, this is a brand new post - read from post data
-        //if ($defaults['accessToken'] == '') return false; // No access token so cannot publish to Buffer
-        //if ($meta['publish'] != '1') return false; // Do not need to publish or update
-        
+
         // Get post
         $post = get_post($postID);
 
@@ -310,10 +306,10 @@ update_option('bmp_opt_admin_url','');
 				$catNames .= '#'.$catName.' ';
 			}
 		}
-		
+
 		// 2. Get author
 		$author = get_user_by('id', $post->post_author);
-                
+
                 // 3. Check if we have an excerpt. If we don't (i.e. it's a Page or CPT with no excerpt functionality), we need
 		// to create an excerpt
 		if (empty($post->post_excerpt)) {
@@ -321,7 +317,7 @@ update_option('bmp_opt_admin_url','');
 		} else {
 			$excerpt = $post->post_excerpt;
 		}
-		
+
 		// 4. Parse text and description
 		$params['text'] = get_option('bmp_opt_post_format');
 		$params['text'] = str_replace('{sitename}', get_bloginfo('name'), $params['text']);
@@ -331,7 +327,7 @@ update_option('bmp_opt_admin_url','');
 		$params['text'] = str_replace('{date}', date('dS F Y', strtotime($post->post_date)), $params['text']);
 		$params['text'] = str_replace('{url}', get_permalink($postID), $params['text']);
 		$params['text'] = str_replace('{author}', $author->display_name, $params['text']);
-		
+
 		// 5. Check if we can include the Featured Image (if available) in the media parameter
 		// If not, just attach the Post URL
 		$media['link'] = rtrim(get_permalink($post->ID), '/');
@@ -347,19 +343,19 @@ update_option('bmp_opt_admin_url','');
 				unset($media['link']); // Important: if set, this attaches a link and drops the image!
 			}
 		}
-		
+
 		// Assign media array to media argument
 		$params['media'] = $media;
 
 		// 6. Add profile IDs
 		$accessToken=  get_option("bmp_opt_access_token");
-                
+
                 /*
                 $profile_url = 'https://api.bufferapp.com/1/profiles.json?access_token=' . urlencode($accessToken);
                 $r = wp_remote_get($profile_url,array(
 		    		'sslverify' => false
 		    	));
-                
+
                 if(!function_exists('json_decode')) {
                     wp_die('A JSON library does not appear to be installed.\n\nPlease contact your server admini f you need help installing one.');
                 } else {
@@ -371,27 +367,27 @@ update_option('bmp_opt_admin_url','');
 			);
 			return;
                         }
-                        
+
                         foreach($response as $profile) {
                             //BMP_DEBUG('buffer profile is: ' . print_r($profile, true));
                             $params['profile_ids'][]=$profile->id;
                         }
                     }
                     */
-                
+
                     $acntids=  get_option("bmp_opt_acnt_id");
                     if(isset($acntids))
                     {
                         $arracntid = explode(",",$acntids);
                         foreach($arracntid as $profid)
                             $params['profile_ids'][]=$profid;
-                    }   
-                    
+                    }
+
 		// 7. Send to Buffer and store response
 		$result = bmp_request($accessToken, 'updates/create.json', 'post', $params);
 		// update_post_meta($postID, 'buffer-my-post'.'-request', '<pre>'.print_r($params,true).'</pre>');
 		update_post_meta($postID, 'buffer-my-post'.'-log', $result);
-		
+
     }
 
      /**
@@ -423,13 +419,13 @@ update_option('bmp_opt_admin_url','');
 		    	));
 				break;
 		}
-                
+
     	BMP_DEBUG('result is: ' . print_r($result, true));
     	// Check the request is valid
     	if (is_wp_error($result)) return $result;
 		if ($result['response']['code'] != 200) return 'Error '.$result['response']['code'].' whilst trying to authenticate: '.$result['response']['message'].'. Please try again.';
-		return json_decode($result['body']);		
+		return json_decode($result['body']);
     }
-    
-                
+
+
 ?>
