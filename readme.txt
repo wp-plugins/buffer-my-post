@@ -12,7 +12,7 @@ Plugin to Buffer about your old posts to get more hits for them and keep them al
 
 Buffer My Posts is a plugin designed to Buffer your older posts to get more traffic.
 
-This plugin helps you to keeps your old posts alive by posting it to buffer and driving more traffic to them from buffer. It also helps you to promote your content. You can set time and no of posts to post to drive more traffic. For questions, comments, or feature requests please contact us: <a target="blank" href="http://www.ajaymatharu.com/">Ajay Matharu</a> OR Dejan Markovic  <a target="blank" href="http://dejanmarkovic.com/">Dejan Markovic</a>you can follow us on twitter at <a target="blank" href="http://twitter.com/matharuajay/">@matharuajay</a> & <a target="blank" href="http://twitter.com/dejanmmarkovic/">@dejanmmarkovic</a>.
+This plugin helps you to keeps your old posts alive by posting it to buffer and driving more traffic to them from buffer. It also helps you to promote your content. You can set time and no of posts to post to drive more traffic. For questions, comments, or feature requests please contact us: <a target="blank" href="http://www.ajaymatharu.com/">Ajay Matharu</a> OR Dejan Markovic  <a target="blank" href="http://dejanmarkovic.com/">Dejan Markovic</a> you can follow us on twitter at <a target="blank" href="http://twitter.com/matharuajay/">@matharuajay</a> & <a target="blank" href="http://twitter.com/dejanmmarkovic/">@dejanmmarkovic</a>.
 
 For updates follow http://twitter.com/matharuajay. If you have anything you can post your comment at <a href="http://www.ajaymatharu.com/buffer-my-post/">Buffer My Post Page.</a>
 
@@ -105,3 +105,6 @@ http://www.ajaymatharu.com/buffer-my-post/
 **New in v15.0.3**
 1. fixed css path issue that was breaking the layout in admin
 2. added space between " Dejan Markovic" and "you..."
+
+**New in v15.0.4**
+1. added again space between " Dejan Markovic" and "you..."
